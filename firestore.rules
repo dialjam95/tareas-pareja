@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Solo estos dos correos pueden leer y escribir. CAMBIA los correos.
+    function ok() {
+      return request.auth != null &&
+        request.auth.token.email in ['dialjam@gmail.com', 'alejand1815@gmail.com'];
+    }
+    match /{document=**} { allow read, write: if ok(); }
+  }
+}
