@@ -1,304 +1,128 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#4f5bd5">
-<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<title>Tareas de a dos</title>
-<style>
-:root{--bg:#f6f7f9;--sf:#fff;--ln:#e8eaef;--tx:#1d2433;--mu:#6a7386;--ac:#4f5bd5;--as:#eceefc;--pe:#d9922e;--en:#3b82d6;--ha:#2f9e6b;--rd:#d64545}
-@media(prefers-color-scheme:dark){:root{--bg:#14161c;--sf:#1c1f27;--ln:#2b2f3a;--tx:#e9eaf0;--mu:#9aa1b1;--ac:#8d97f5;--as:#262a45;--pe:#e8a94c;--en:#5ea0ee;--ha:#4cc08e;--rd:#ee7070}}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--tx);font:14.5px/1.45 'Plus Jakarta Sans',system-ui,sans-serif}
-button,input,select{font:inherit;color:inherit}
-button{cursor:pointer;border:1px solid var(--ln);background:var(--sf);border-radius:8px;padding:7px 12px}button:hover{background:var(--as)}
-input,select{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:9px 11px;width:100%}
-:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-.pri{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}.pri:hover{background:var(--ac);filter:brightness(1.1)}
-.shell{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
-aside{background:var(--sf);border-right:1px solid var(--ln);padding:calc(18px + env(safe-area-inset-top)) 12px 18px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;padding:0 8px 14px}
-.logo{width:28px;height:28px;border-radius:8px;background:var(--ac);color:#fff;display:grid;place-items:center}
-.nav{display:flex;flex-direction:column;gap:2px;overflow-y:auto}
-.nav button{display:flex;align-items:center;gap:8px;border:0;background:none;text-align:left;width:100%}
-.nav button.on{background:var(--as);color:var(--ac);font-weight:600}.nav .n{margin-left:auto;color:var(--mu);font-size:12px}
-.sec{color:var(--mu);font-size:12px;padding:12px 10px 4px}.grow{flex:1}#cfgb{border:0;background:none;text-align:left}
-.main{padding:calc(26px + env(safe-area-inset-top)) 32px 48px;min-width:0}
-.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
-h1{font-size:24px;margin:0;letter-spacing:-.01em}.sub{color:var(--mu)}
-.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.acts input{width:210px}
-.seg{display:flex;border:1px solid var(--ln);border-radius:8px;overflow:hidden;background:var(--sf)}.seg button{border:0;border-radius:0}.seg .on{background:var(--as);color:var(--ac);font-weight:600}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
-.sc{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:12px 14px}.sc b{display:block;font-size:22px}.sc span{color:var(--mu);font-size:13px}
-.prog{height:6px;border-radius:99px;background:var(--ln);margin-bottom:18px;overflow:hidden}.prog i{display:block;height:100%;background:var(--ha)}
-.qa{margin-bottom:14px}.hint{color:var(--mu);font-size:13px;margin-top:6px}
-#bn{background:var(--rd);color:#fff;border-radius:10px;padding:9px 12px;margin-bottom:12px}
-.tw{background:var(--sf);border:1px solid var(--ln);border-radius:12px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:860px}
-th{text-align:left;font-weight:500;color:var(--mu);font-size:13px;padding:10px 12px;border-bottom:1px solid var(--ln)}
-td{padding:9px 12px;border-bottom:1px solid var(--ln);vertical-align:middle}tbody tr:last-child td{border-bottom:0}
-th:last-child,td:last-child{width:92px}
-tr.t{cursor:pointer}tr.t:hover td{background:var(--bg)}
-tr.gh td{background:var(--bg);font-weight:600;cursor:pointer;padding:8px 12px}tr.gh .n{color:var(--mu);font-weight:500;margin-left:6px}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;background:var(--c)}
-.tag{background:var(--as);color:var(--ac);border-radius:6px;padding:2px 8px;font-size:13px;white-space:nowrap}
-.who{display:flex;align-items:center;gap:8px}.av{width:24px;height:24px;border-radius:50%;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
-.dt{white-space:nowrap}.late{color:var(--rd);font-weight:600}.mu{color:var(--mu)}
-.pill{border:0;border-radius:99px;padding:3px 11px;font-size:13px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
-.s-pendiente{--c:var(--pe)}.s-curso{--c:var(--en)}.s-hecha{--c:var(--ha)}
-tr.hecha .ct,.cd.hecha .ct{text-decoration:line-through;color:var(--mu)}
-.ia{display:flex;gap:2px;justify-content:flex-end}
-.ic{border:0;background:none;width:32px;height:32px;padding:0;display:grid;place-items:center;border-radius:8px;color:var(--mu);transition:background .15s,color .15s}
-.ic.ok{color:var(--ha)}.ic.ok:hover{background:color-mix(in srgb,var(--ha) 14%,transparent)}
-.ic.ok.on circle{fill:currentColor}.ic.ok.on path{stroke:var(--sf)}
-.ic.rm:hover{color:var(--rd);background:color-mix(in srgb,var(--rd) 12%,transparent)}
-.bin{width:52px;height:52px;border-radius:50%;margin:0 auto;display:grid;place-items:center;color:var(--rd);background:color-mix(in srgb,var(--rd) 12%,transparent)}
-.dng{background:var(--rd);border-color:var(--rd);color:#fff;font-weight:600}.dng:hover{background:var(--rd);filter:brightness(1.08)}
-.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
-.col{background:color-mix(in srgb,var(--ln) 45%,transparent);border:1px dashed transparent;border-radius:12px;padding:10px;min-height:140px}.col.over{border-color:var(--ac);background:var(--as)}
-.col h3{margin:2px 4px 10px;font-size:14px;display:flex;align-items:center}.col h3 span{margin-left:auto;color:var(--mu);font-weight:500}
-.cd{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:grab;display:grid;gap:8px}
-.cd .r{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-dialog{border:1px solid var(--ln);border-radius:16px;background:var(--sf);color:var(--tx);width:min(94vw,480px);padding:20px}
-dialog::backdrop{background:rgba(20,22,30,.45)}dialog h2{margin:0 0 12px;font-size:18px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.btns{display:flex;gap:8px;margin-top:14px}.btns button{flex:1}.btns .pri{flex:2}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{border:1px solid var(--ln);border-radius:99px;padding:3px 4px 3px 11px;font-size:13px}.chip button{border:0;background:none;padding:0 6px;color:var(--mu)}
-.sm{padding:3px 10px;font-size:13px;border-radius:99px}.add{display:flex;gap:8px}.lbl{display:block;color:var(--mu);font-size:13px;margin:14px 0 4px}
-.lg{min-height:100vh;display:grid;place-items:center;padding:20px}.lgc{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:28px;width:min(92vw,380px);display:grid;gap:10px}
-#err{color:var(--rd);font-size:13px}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:var(--tx);color:var(--bg);padding:10px 14px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:99}
-.toast button{background:none;border:0;color:var(--ac);font-weight:700;padding:0}
-@media(max-width:860px){
-  .shell{display:block}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;border-right:0;border-bottom:1px solid var(--ln);padding:calc(10px + env(safe-area-inset-top)) 12px 10px}
-  .brand{padding:0}.nav{flex-direction:row;flex:1 1 100%;order:3;overflow-x:auto}.nav button{width:auto;white-space:nowrap}.sec,.grow{display:none}#cfgb{margin-left:auto}
-  .main{padding:16px 14px 40px}.stats{grid-template-columns:repeat(2,1fr)}.board{grid-template-columns:1fr}.acts input{width:100%}.acts{width:100%}
-  table{min-width:0}thead{display:none}tr.t{display:block;padding:6px 0;border-bottom:1px solid var(--ln)}
-  tr.t td{display:flex;justify-content:space-between;align-items:center;gap:12px;border:0;padding:4px 12px;width:auto}tr.t td::before{content:attr(data-l);color:var(--mu)}
-  tr.gh,tr.gh td{display:block}
-}
-</style></head><body>
-<div id="login" class="lg" hidden><div class="lgc">
-  <div class="brand" style="padding:0"><span class="logo">✓</span>Tareas de a dos</div>
-  <input id="em" type="email" placeholder="Correo" autocomplete="username">
-  <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password">
-  <button class="pri" id="in">Entrar</button><div id="err"></div>
-</div></div>
+<html lang="es">
 
-<div id="app" class="shell" hidden>
-  <aside>
-    <div class="brand"><span class="logo">✓</span>Tareas de a dos</div>
-    <nav class="nav" id="nav"></nav><div class="grow"></div>
-    <button id="cfgb">⚙ Ajustes</button>
-  </aside>
-  <section class="main">
-    <header class="top">
-      <div><h1 id="ttl">Todas las tareas</h1><div class="sub" id="sub"></div></div>
-      <div class="acts"><input id="q" type="search" placeholder="Buscar tareas" aria-label="Buscar"><div class="seg" id="seg"></div><button class="pri" id="new">+ Nueva tarea</button></div>
-    </header>
-    <div id="bn" hidden></div>
-    <div class="stats" id="stats"></div><div class="prog"><i id="pg"></i></div>
-    <div class="qa"><input id="qa" placeholder="＋ Escribe una tarea y pulsa Enter" maxlength="120" enterkeyhint="done"><div class="hint" id="qh"></div></div>
-    <div class="tw" id="lst"><table><thead><tr><th>Tarea</th><th>Acción</th><th>Encargado</th><th>Recordatorio</th><th>Estado</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
-    <div class="board" id="bd" hidden></div>
-  </section>
-</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4f5bd5">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <title>Tareas de a dos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-<dialog id="dlg"><h2 id="mt">Nueva tarea</h2>
-  <input id="cosa" placeholder="¿Qué hay que hacer? (ej. Cita del dentista)" maxlength="120">
-  <div class="row"><select id="acc" aria-label="Acción"></select><select id="per" aria-label="Encargado"></select></div>
-  <label class="lbl" for="fec">Recordatorio</label><input id="fec" type="datetime-local">
-  <div class="chips" id="qd"></div>
-  <div class="row" style="margin-top:0">
-    <select id="avi" aria-label="Aviso"><option value="0">Avisar a la hora</option><option value="15">15 min antes</option><option value="60">1 hora antes</option><option value="1440">1 día antes</option></select>
-    <select id="rep" aria-label="Repetición"><option value="">No se repite</option><option value="diaria">Cada día</option><option value="semanal">Cada semana</option><option value="mensual">Cada mes</option></select>
+<body>
+  <div id="login" class="lg" hidden>
+    <div class="lgc">
+      <div class="brand" style="padding:0"><span class="logo">✓</span>Tareas de a dos</div>
+      <input id="em" type="email" placeholder="Correo" autocomplete="username">
+      <input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password">
+      <button class="pri" id="in">Entrar</button>
+      <div id="err"></div>
+    </div>
   </div>
-  <div class="btns"><button id="cancel" type="button">Cancelar</button><button class="pri" id="go" type="button">Guardar tarea</button></div>
-</dialog>
 
-<dialog id="cfg"><h2>Ajustes</h2>
-  <label class="lbl" for="yo" style="margin-top:0">¿Quién eres? Así recibes solo tus avisos</label><select id="yo"></select>
-  <button id="notif" style="margin-top:10px">🔔 Activar avisos</button>
-  <label class="lbl">Personas</label><div class="chips" id="cp"></div><div class="add"><input id="np" placeholder="Nueva persona" maxlength="30"><button id="ap">Añadir</button></div>
-  <label class="lbl">Acciones</label><div class="chips" id="ca"></div><div class="add"><input id="na" placeholder="Nueva acción" maxlength="30"><button id="aa">Añadir</button></div>
-  <div class="btns"><button id="out">Cerrar sesión</button><button class="pri" id="cfgx">Listo</button></div>
-</dialog>
-<dialog id="cdel" style="width:min(92vw,400px);text-align:center">
-  <div class="bin"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4h6v3"/></svg></div>
-  <h2 style="margin-top:12px">¿Seguro que deseas borrar la tarea?</h2>
-  <div class="sub" id="cdt"></div>
-  <div class="btns"><button id="cdno" type="button">Cancelar</button><button class="dng" id="cdsi" type="button">Borrar tarea</button></div>
-</dialog>
-<div id="toast" class="toast" hidden></div>
+  <div id="app" class="shell" hidden>
+    <aside>
+      <div class="brand"><span class="logo">✓</span>Tareas de a dos</div>
+      <nav class="nav" id="nav"></nav>
+      <div class="grow"></div>
+      <button id="cfgb">⚙ Ajustes</button>
+    </aside>
+    <section class="main">
+      <header class="top">
+        <div>
+          <h1 id="ttl">Todas las tareas</h1>
+          <div class="sub" id="sub"></div>
+        </div>
+        <div class="acts"><input id="q" type="search" placeholder="Buscar tareas" aria-label="Buscar">
+          <div class="seg" id="seg"></div><button class="pri" id="new">+ Nueva tarea</button>
+        </div>
+      </header>
+      <div id="bn" hidden></div>
+      <div class="stats" id="stats"></div>
+      <div class="prog"><i id="pg"></i></div>
+      <div class="qa"><input id="qa" placeholder="＋ Escribe una tarea y pulsa Enter" maxlength="120"
+          enterkeyhint="done">
+        <div class="hint" id="qh"></div>
+      </div>
+      <div class="tw" id="lst">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarea</th>
+              <th>Acción</th>
+              <th>Encargado</th>
+              <th>Recordatorio</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </div>
+      <div class="board" id="bd" hidden></div>
+    </section>
+  </div>
 
-<script type="module">
-import {firebaseConfig,VAPID_KEY} from './firebase-config.js';
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import {initializeFirestore,persistentLocalCache,doc,collection,setDoc,updateDoc,deleteDoc,onSnapshot} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
-import {getMessaging,getToken,isSupported} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js';
-const $=id=>document.getElementById(id);
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache()});
-const DEF=['Comprar','Llamar','Reservar','Pagar','Limpiar','Arreglar','Revisar'];
-const ST=[['pendiente','Pendiente'],['curso','En curso'],['hecha','Hecha']];
-let tasks=[],L={acciones:null,personas:[]},filtro='todas',vista=localStorage.getItem('vista')||'lista',q='',cerr=new Set(['hecha']),unsubs=[],timer,editId=null,tt;
-const LS=k=>localStorage.getItem(k)||'',yo=()=>LS('yo');
-const acc=()=>L.acciones&&L.acciones.length?L.acciones:DEF;
-const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
-const opt=(v,t)=>{const o=el('option',null,t);o.value=v;return o};
-const setSel=(s,v)=>{if(v&&![...s.options].some(o=>o.value===v))s.append(opt(v,v));s.value=v};
-const pad=n=>String(n).padStart(2,'0');
-const toInput=ms=>{const d=new Date(ms);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`};
-function rel(ms){const h=new Date(ms).toLocaleTimeString('es',{hour:'numeric',minute:'2-digit'});
-  const a=new Date();a.setHours(0,0,0,0);const b=new Date(ms);b.setHours(0,0,0,0);const n=Math.round((b-a)/864e5);
-  if(n===0)return 'Hoy '+h;if(n===1)return 'Mañana '+h;if(n===-1)return 'Ayer '+h;
-  if(n>1&&n<7)return new Date(ms).toLocaleDateString('es',{weekday:'long'})+' '+h;
-  return new Date(ms).toLocaleDateString('es',{day:'numeric',month:'short'})+' '+h}
-const fail=e=>alert('No se pudo guardar: '+(e.message||e));
-const saveL=()=>setDoc(doc(db,'config','listas'),{acciones:acc(),personas:L.personas}).catch(fail);
-function toast(msg,undo){const t=$('toast');t.replaceChildren(el('span',null,msg));
-  if(undo){const b=el('button',null,'Deshacer');b.onclick=()=>{undo();t.hidden=true};t.append(b)}
-  t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,6000)}
+  <dialog id="dlg">
+    <h2 id="mt">Nueva tarea</h2>
+    <input id="cosa" placeholder="¿Qué hay que hacer? (ej. Cita del dentista)" maxlength="120">
+    <div class="row"><select id="acc" aria-label="Acción"></select><select id="per" aria-label="Encargado"></select>
+    </div>
+    <label class="lbl" for="fec">Recordatorio</label><input id="fec" type="datetime-local">
+    <div class="chips" id="qd"></div>
+    <div class="row" style="margin-top:0">
+      <select id="avi" aria-label="Aviso">
+        <option value="0">Avisar a la hora</option>
+        <option value="15">15 min antes</option>
+        <option value="60">1 hora antes</option>
+        <option value="1440">1 día antes</option>
+      </select>
+      <select id="rep" aria-label="Repetición">
+        <option value="">No se repite</option>
+        <option value="diaria">Cada día</option>
+        <option value="semanal">Cada semana</option>
+        <option value="mensual">Cada mes</option>
+      </select>
+    </div>
+    <div class="btns"><button id="cancel" type="button">Cancelar</button><button class="pri" id="go"
+        type="button">Guardar tarea</button></div>
+  </dialog>
 
-function siguiente(t){const d=new Date(t.fechaMs);
-  do{if(t.repite==='diaria')d.setDate(d.getDate()+1);else if(t.repite==='semanal')d.setDate(d.getDate()+7);else d.setMonth(d.getMonth()+1)}while(d.getTime()<=Date.now());
-  return d.getTime()}
-function setEstado(t,e){
-  updateDoc(doc(db,'tasks',t.id),{estado:e}).catch(fail);
-  if(e==='hecha'&&t.estado!=='hecha'&&t.repite&&t.fechaMs){
-    const {id,...r}=t;
-    setDoc(doc(collection(db,'tasks')),{...r,fechaMs:siguiente(t),estado:'pendiente',notificada:false,avisarAsignacion:false,creada:Date.now()}).catch(fail);
-    toast('Se programó la siguiente repetición');
-  }}
+  <dialog id="cfg">
+    <h2>Ajustes</h2>
+    <label class="lbl" for="yo" style="margin-top:0">¿Quién eres? Así recibes solo tus avisos</label><select
+      id="yo"></select>
+    <button id="notif" style="margin-top:10px">🔔 Activar avisos</button>
+    <label class="lbl">Personas</label>
+    <div class="chips" id="cp"></div>
+    <div class="add"><input id="np" placeholder="Nueva persona" maxlength="30"><button id="ap">Añadir</button></div>
+    <label class="lbl">Acciones</label>
+    <div class="chips" id="ca"></div>
+    <div class="add"><input id="na" placeholder="Nueva acción" maxlength="30"><button id="aa">Añadir</button></div>
+    <div class="btns"><button id="out">Cerrar sesión</button><button class="pri" id="cfgx">Listo</button></div>
+  </dialog>
+  <dialog id="cdel" style="width:min(92vw,400px);text-align:center">
+    <div class="bin"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 7h16" />
+        <path d="M10 11v6M14 11v6" />
+        <path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12" />
+        <path d="M9 7V4h6v3" />
+      </svg></div>
+    <h2 style="margin-top:12px">¿Seguro que deseas borrar la tarea?</h2>
+    <div class="sub" id="cdt"></div>
+    <div class="btns"><button id="cdno" type="button">Cancelar</button><button class="dng" id="cdsi"
+        type="button">Borrar tarea</button></div>
+  </dialog>
+  <div id="toast" class="toast" hidden></div>
 
-const late=t=>t.fechaMs&&t.estado!=='hecha'&&t.fechaMs<Date.now();
-const av=n=>{const s=el('span','av',(n||'?')[0].toUpperCase());s.style.background=`hsl(${[...(n||'?')].reduce((a,c)=>a+c.charCodeAt(0),0)*47%360} 50% 46%)`;return s};
-const who=n=>{const w=el('span','who');if(n)w.append(av(n),el('span',null,n));else w.append(el('span','mu','Sin asignar'));return w};
-const fecha=t=>t.fechaMs?el('span','dt'+(late(t)?' late':''),(t.repite?'🔁 ':'')+rel(t.fechaMs)+(late(t)?' (vencida)':'')):el('span','mu','Sin fecha');
-const pill=t=>{const b=el('button','pill s-'+t.estado,(ST.find(x=>x[0]===t.estado)||ST[0])[1]);
-  b.onclick=e=>{e.stopPropagation();setEstado(t,ST[(ST.findIndex(x=>x[0]===t.estado)+1)%3][0])};return b};
-const SVG='fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
-const ICO_OK=`<svg viewBox="0 0 24 24" width="20" height="20" ${SVG}><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg>`;
-const ICO_RM=`<svg viewBox="0 0 24 24" width="18" height="18" ${SVG}><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M9 7V4h6v3"/></svg>`;
-let porBorrar=null;
-function pedirBorrar(t){porBorrar=t;$('cdt').textContent='«'+t.cosa+'»';$('cdel').showModal()}
-const acciones=t=>{const w=el('span','ia'),hecha=t.estado==='hecha';
-  const ok=el('button','ic ok'+(hecha?' on':''));ok.innerHTML=ICO_OK;ok.title=hecha?'Reabrir tarea':'Marcar como hecha';ok.setAttribute('aria-label',ok.title);
-  ok.onclick=e=>{e.stopPropagation();setEstado(t,hecha?'pendiente':'hecha')};
-  const rm=el('button','ic rm');rm.innerHTML=ICO_RM;rm.title='Borrar tarea';rm.setAttribute('aria-label','Borrar tarea');
-  rm.onclick=e=>{e.stopPropagation();pedirBorrar(t)};
-  w.append(ok,rm);return w};
-const byFecha=(a,b)=>(a.fechaMs||9e15)-(b.fechaMs||9e15);
+  <script type="module" src="app.js"></script>
+</body>
 
-function fila(t){
-  const tr=el('tr','t'+(t.estado==='hecha'?' hecha':''));tr.onclick=e=>{if(!e.target.closest('button,input'))abrir(t)};
-  const cell=(l,c)=>{const td=el('td');td.dataset.l=l;td.append(c);tr.append(td)};
-  cell('Tarea',el('strong','ct',t.cosa));cell('Acción',el('span','tag',t.accion));cell('Encargado',who(t.encargado));
-  cell('Recordatorio',fecha(t));cell('Estado',pill(t));cell('',acciones(t));return tr}
-function tarjeta(t){
-  const c=el('div','cd'+(t.estado==='hecha'?' hecha':''));c.draggable=true;
-  c.ondragstart=e=>e.dataTransfer.setData('text/plain',t.id);c.onclick=e=>{if(!e.target.closest('button,input'))abrir(t)};
-  const r1=el('div','r'),r2=el('div','r');
-  r1.append(el('span','tag',t.accion),fecha(t));r2.append(who(t.encargado),pill(t),acciones(t));
-  c.append(el('strong','ct',t.cosa),r1,r2);return c}
-
-function chips(box,arr,isP){box.replaceChildren(...arr.map(v=>{const c=el('span','chip',v),b=el('button',null,'✕');b.setAttribute('aria-label','Quitar '+v);
-  b.onclick=()=>{if(isP)L.personas=L.personas.filter(x=>x!==v);else L.acciones=acc().filter(x=>x!==v);saveL()};c.append(b);return c}))}
-function navItem(k,label,n,pre){const b=el('button',filtro===k?'on':'');if(pre)b.append(pre);b.append(el('span',null,label),el('span','n',String(n)));b.onclick=()=>{filtro=k;render()};return b}
-
-function render(){
-  const va=$('acc').value,vp=$('per').value;
-  $('acc').replaceChildren(...acc().map(x=>opt(x,x)));
-  $('per').replaceChildren(...(L.personas.length?L.personas:['']).map(x=>opt(x,x||'(añade personas en Ajustes)')));
-  if(va)setSel($('acc'),va);if(vp)setSel($('per'),vp);
-  $('yo').replaceChildren(opt('','(elige)'),...L.personas.map(x=>opt(x,x)));$('yo').value=yo();
-  chips($('cp'),L.personas,true);chips($('ca'),acc(),false);
-  const pend=tasks.filter(t=>t.estado!=='hecha');
-  // navegación lateral
-  const nav=[el('div','sec','Vistas'),navItem('todas','Todas',pend.length)];
-  if(yo())nav.push(navItem('mias','Mis tareas',pend.filter(t=>t.encargado===yo()).length));
-  nav.push(navItem('vencidas','Vencidas',tasks.filter(late).length));
-  if(L.personas.length)nav.push(el('div','sec','Personas'),...L.personas.map(p=>navItem('p:'+p,p,pend.filter(t=>t.encargado===p).length,av(p))));
-  $('nav').replaceChildren(...nav);
-  $('seg').replaceChildren(...[['lista','☰ Lista'],['tablero','▦ Tablero']].map(([k,n])=>{const b=el('button',vista===k?'on':'',n);b.onclick=()=>{vista=k;localStorage.setItem('vista',k);render()};return b}));
-  $('lst').hidden=vista!=='lista';$('bd').hidden=vista!=='tablero';
-  // filtro + búsqueda
-  const pasa=t=>filtro==='todas'||(filtro==='mias'&&t.encargado===yo())||(filtro==='vencidas'&&late(t))||(filtro.startsWith('p:')&&t.encargado===filtro.slice(2));
-  const base=tasks.filter(pasa),ql=q.trim().toLowerCase();
-  const v=ql?base.filter(t=>(t.cosa+' '+t.accion+' '+(t.encargado||'')).toLowerCase().includes(ql)):base;
-  $('ttl').textContent=filtro==='todas'?'Todas las tareas':filtro==='mias'?'Mis tareas':filtro==='vencidas'?'Vencidas':filtro.slice(2);
-  $('sub').textContent=v.length+(v.length===1?' tarea':' tareas');
-  const n=e=>base.filter(t=>t.estado===e).length,nl=base.filter(late).length;
-  $('stats').replaceChildren(...[['Pendientes',n('pendiente')],['En curso',n('curso')],['Vencidas',nl],['Hechas',n('hecha')]].map(([l,c])=>{
-    const d=el('div','sc'),b=el('b',l==='Vencidas'&&c?'late':'',String(c));d.append(b,el('span',null,l));return d}));
-  $('pg').style.width=(base.length?Math.round(n('hecha')/base.length*100):0)+'%';
-  $('qh').textContent=`Se creará como «${LS('ultAcc')||acc()[0]}» para ${yo()||L.personas[0]||'nadie'}.`+(L.personas.length&&!yo()?' Elige quién eres en Ajustes para recibir solo tus avisos.':'');
-  // lista agrupada por estado
-  const rows=[];
-  ST.forEach(([g,lbl])=>{const it=v.filter(t=>t.estado===g).sort(byFecha);if(!it.length)return;
-    const tr=el('tr','gh'),td=el('td');td.colSpan=6;
-    td.append(el('span','dot s-'+g),el('span',null,(cerr.has(g)?'▸ ':'▾ ')+lbl),el('span','n',String(it.length)));
-    tr.onclick=()=>{cerr.has(g)?cerr.delete(g):cerr.add(g);render()};tr.append(td);rows.push(tr);
-    if(!cerr.has(g))it.forEach(t=>rows.push(fila(t)))});
-  if(!v.length){const tr=el('tr'),td=el('td','mu','Nada por aquí todavía. Escribe una tarea arriba o pulsa «Nueva tarea».');td.colSpan=6;td.style.textAlign='center';td.style.padding='28px';tr.append(td);rows.push(tr)}
-  $('tb').replaceChildren(...rows);
-  // tablero
-  $('bd').replaceChildren(...ST.map(([g,lbl])=>{
-    const it=v.filter(t=>t.estado===g).sort(byFecha),col=el('div','col'),h=el('h3');
-    h.append(el('span','dot s-'+g),document.createTextNode(lbl),el('span',null,String(it.length)));col.append(h,...it.map(tarjeta));
-    col.ondragover=e=>{e.preventDefault();col.classList.add('over')};col.ondragleave=()=>col.classList.remove('over');
-    col.ondrop=e=>{e.preventDefault();col.classList.remove('over');const t=tasks.find(x=>x.id===e.dataTransfer.getData('text/plain'));if(t&&t.estado!==g)setEstado(t,g)};
-    return col}));
-  const due=tasks.filter(late);$('bn').hidden=!due.length;$('bn').textContent='⏰ '+due.length+' vencida(s): '+due.slice(0,3).map(t=>t.cosa).join(', ');
-}
-function abrir(t){editId=t?t.id:null;$('mt').textContent=t?'Editar tarea':'Nueva tarea';
-  $('cosa').value=t?t.cosa:'';setSel($('acc'),t?t.accion:(LS('ultAcc')||acc()[0]));setSel($('per'),t?(t.encargado||''):(yo()||L.personas[0]||''));
-  $('fec').value=t&&t.fechaMs?toInput(t.fechaMs):'';$('avi').value=String(t?t.aviso||0:0);$('rep').value=t?t.repite||'':'';
-  $('dlg').showModal();if(!t)$('cosa').focus()}
-const atajos=[['En 1 h',()=>Date.now()+36e5],['Hoy 6 pm',()=>{const d=new Date();d.setHours(18,0,0,0);return d.getTime()}],
-  ['Mañana 9 am',()=>{const d=new Date();d.setDate(d.getDate()+1);d.setHours(9,0,0,0);return d.getTime()}],['Quitar',()=>null]];
-$('qd').replaceChildren(...atajos.map(([n,f])=>{const b=el('button','sm',n);b.type='button';b.onclick=()=>{const ms=f();$('fec').value=ms?toInput(ms):''};return b}));
-
-async function avisos(){
-  try{if(!(await isSupported()))throw 0;
-    if(await Notification.requestPermission()!=='granted'){$('notif').textContent='🔕 Bloqueados';return}
-    const reg=await navigator.serviceWorker.register('sw.js');await navigator.serviceWorker.ready;
-    const t=await getToken(getMessaging(app),{vapidKey:VAPID_KEY,serviceWorkerRegistration:reg});
-    await setDoc(doc(db,'tokens',t),{email:auth.currentUser.email,persona:yo(),ts:Date.now()});$('notif').textContent='🔔 Avisos activos';
-  }catch(e){console.warn(e);$('notif').textContent='🔕 No disponible'}
-}
-onAuthStateChanged(auth,u=>{
-  $('login').hidden=!!u;$('app').hidden=!u;unsubs.forEach(f=>f());unsubs=[];clearInterval(timer);if(!u)return;
-  unsubs.push(onSnapshot(collection(db,'tasks'),s=>{tasks=s.docs.map(d=>({id:d.id,...d.data()}));render()},fail));
-  unsubs.push(onSnapshot(doc(db,'config','listas'),s=>{if(s.exists()){const d=s.data();L={acciones:d.acciones||null,personas:d.personas||[]}}render()},fail));
-  timer=setInterval(render,30000);
-  if('Notification' in window&&Notification.permission==='granted')avisos();
-});
-$('in').onclick=()=>signInWithEmailAndPassword(auth,$('em').value.trim(),$('pw').value).catch(()=>$('err').textContent='Correo o contraseña incorrectos.');
-$('pw').addEventListener('keydown',e=>{if(e.key==='Enter')$('in').click()});
-$('out').onclick=()=>{$('cfg').close();signOut(auth)};$('notif').onclick=avisos;
-$('cfgb').onclick=()=>$('cfg').showModal();$('cfgx').onclick=()=>$('cfg').close();
-$('yo').onchange=()=>{localStorage.setItem('yo',$('yo').value);if('Notification' in window&&Notification.permission==='granted')avisos();render()};
-$('q').oninput=e=>{q=e.target.value;render()};
-$('cdno').onclick=()=>$('cdel').close();
-$('cdsi').onclick=()=>{const t=porBorrar;porBorrar=null;$('cdel').close();if(!t)return;const {id,...data}=t;
-  deleteDoc(doc(db,'tasks',id)).then(()=>toast('Tarea eliminada',()=>setDoc(doc(db,'tasks',id),data))).catch(fail)};
-$('new').onclick=()=>abrir(null);$('cancel').onclick=()=>$('dlg').close();
-['dlg','cfg','cdel'].forEach(i=>$(i).addEventListener('click',e=>{if(e.target===$(i))$(i).close()}));
-$('go').onclick=()=>{
-  const cosa=$('cosa').value.trim();if(!cosa)return $('cosa').focus();
-  const f=$('fec').value,fechaMs=f?new Date(f).getTime():null,enc=$('per').value;
-  const base={cosa,accion:$('acc').value,encargado:enc,fechaMs,aviso:+$('avi').value,repite:$('rep').value};
-  const otro=!!(enc&&yo()&&enc!==yo());localStorage.setItem('ultAcc',base.accion);
-  let p;
-  if(editId){const t=tasks.find(x=>x.id===editId)||{};
-    const cambio=t.fechaMs!==fechaMs||(t.aviso||0)!==base.aviso;
-    p=updateDoc(doc(db,'tasks',editId),{...base,...(cambio?{notificada:false}:{}),...(otro&&enc!==t.encargado?{avisarAsignacion:true}:{})});
-  }else p=setDoc(doc(collection(db,'tasks')),{...base,estado:'pendiente',notificada:false,avisarAsignacion:otro,creada:Date.now()});
-  p.then(()=>$('dlg').close()).catch(fail)};
-$('qa').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const cosa=e.target.value.trim();if(!cosa)return;
-  setDoc(doc(collection(db,'tasks')),{cosa,accion:LS('ultAcc')||acc()[0],encargado:yo()||L.personas[0]||'',fechaMs:null,aviso:0,repite:'',estado:'pendiente',notificada:false,avisarAsignacion:false,creada:Date.now()})
-    .then(()=>{e.target.value=''}).catch(fail)});
-$('ap').onclick=()=>{const n=$('np').value.trim();if(n&&!L.personas.includes(n)){L.personas=[...L.personas,n];$('np').value='';saveL()}};
-$('aa').onclick=()=>{const n=$('na').value.trim();if(n&&!acc().includes(n)){L.acciones=[...acc(),n];$('na').value='';saveL()}};
-</script></body></html>
+</html>
